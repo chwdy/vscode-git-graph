@@ -2889,6 +2889,8 @@ describe('Config', () => {
 
 	describe('stickyHeader', testBooleanExtensionSetting('stickyHeader', 'stickyHeader', true));
 
+	describe('useCustomAskpass', testBooleanExtensionSetting('useCustomAskpass', 'useCustomAskpass', false));
+
 	describe('tabIconColourTheme', () => {
 		it('Should return TabIconColourTheme.Colour when the configuration value is "colour"', () => {
 			// Setup

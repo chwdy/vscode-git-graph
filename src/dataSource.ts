@@ -1894,7 +1894,9 @@ export class DataSource extends Disposable {
 
 			resolveSpawnOutput(cp.spawn(this.gitExecutable.path, args, {
 				cwd: repo,
-				env: Object.assign({}, process.env, this.askpassEnv)
+				env: getConfig().useCustomAskpass
+					? Object.assign({}, process.env, this.askpassEnv)
+					: process.env
 			})).then((values) => {
 				const status = values[0], stdout = values[1], stderr = values[2];
 				if (status.code === 0 || ignoreExitCode) {

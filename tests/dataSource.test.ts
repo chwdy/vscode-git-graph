@@ -141,6 +141,33 @@ describe('DataSource', () => {
 		});
 	});
 
+	describe('spawnGitEnv', () => {
+		it('Should pass process.env directly to the spawned Git process when useCustomAskpass is FALSE (default)', async () => {
+			// Setup
+			mockGitSuccessOnce('https://github.com/mhutchie/vscode-git-graph.git\n');
+
+			// Run
+			await dataSource.getRemoteUrl('/path/to/repo', 'origin');
+
+			// Assert
+			expect(spyOnSpawn).toBeCalledWith('/path/to/git', ['config', '--get', 'remote.origin.url'], expect.objectContaining({ env: process.env }));
+		});
+
+		it('Should merge askpassEnv into the environment when useCustomAskpass is TRUE', async () => {
+			// Setup
+			vscode.mockExtensionSettingReturnValue('useCustomAskpass', true);
+			mockGitSuccessOnce('https://github.com/mhutchie/vscode-git-graph.git\n');
+
+			// Run
+			await dataSource.getRemoteUrl('/path/to/repo', 'origin');
+
+			// Assert
+			const spawnEnv = spyOnSpawn.mock.calls[spyOnSpawn.mock.calls.length - 1][2].env;
+			expect(spawnEnv).not.toBe(process.env);
+			expect(spawnEnv).toMatchObject(process.env);
+		});
+	});
+
 	describe('getRepoInfo', () => {
 		it('Should return the repository info', async () => {
 			// Setup
