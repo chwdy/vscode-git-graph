@@ -1165,6 +1165,11 @@
 					"default": true,
 					"description": "Keeps the header visible when the view is scrolled"
 				},
+				"git-graph.useCustomAskpass": {
+					"type": "boolean",
+					"default": false,
+					"markdownDescription": "When enabled, Git Graph uses its own credential prompt (an input box in VS Code) for Git authentication, overriding the system Git credential flow. **Disable this setting** (default) to let Git use the system credential helpers configured in your terminal — required for modern GitHub authentication via Personal Access Token, SSH, or Git Credential Manager. Enable it only if your system credential helper is unavailable in the VS Code extension host environment."
+				},
 				"git-graph.tabIconColourTheme": {
 					"type": "string",
 					"enum": [

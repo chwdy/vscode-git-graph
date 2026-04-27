@@ -514,6 +514,13 @@ class Config {
 	}
 
 	/**
+	 * Get the value of the `git-graph.useCustomAskpass` Extension Setting.
+	 */
+	get useCustomAskpass() {
+		return !!this.config.get('useCustomAskpass', false);
+	}
+
+	/**
 	 * Get the value of the `git-graph.repository.useMailmap` Extension Setting.
 	 */
 	get useMailmap() {
